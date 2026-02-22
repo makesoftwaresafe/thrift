@@ -251,8 +251,11 @@ RUN apt-get install -y --no-install-recommends \
       php7.4-curl \
       php7.4-xdebug \
       php-pear \
-      re2c \
-      composer
+      re2c
+
+# Install Composer 2 explicitly to avoid distro package version drift.
+RUN curl -sS https://getcomposer.org/installer | php -- --2 --install-dir=/usr/local/bin --filename=composer && \
+    composer --version
 
 RUN apt-get install -y --no-install-recommends \
       `# Python3 dependencies` \
